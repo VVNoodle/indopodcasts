@@ -2,13 +2,15 @@ import { MetaTags } from '@redwoodjs/web'
 import { Fragment, useState } from 'react'
 import SearchBar from 'src/components/SearchBar/SearchBar'
 import { Dialog, Disclosure, Popover, Tab, Transition } from '@headlessui/react'
+import { MenuIcon, XIcon } from '@heroicons/react/outline'
 import {
-  MenuIcon,
-  SearchIcon,
-  ShoppingBagIcon,
-  XIcon,
-} from '@heroicons/react/outline'
-import { ChevronDownIcon, PlusSmIcon } from '@heroicons/react/solid'
+  ChevronDownIcon,
+  PlusSmIcon,
+  ViewGridIcon,
+} from '@heroicons/react/solid'
+
+import PodcastsCell from 'src/components/PodcastsCell'
+import Sort from 'src/components/Sort'
 
 const navigation = {
   categories: [
@@ -79,93 +81,31 @@ const breadcrumbs = [
 ]
 const filters = [
   {
-    id: 'color',
-    name: 'Color',
+    id: 'genre',
+    name: 'Genre',
     options: [
-      { value: 'white', label: 'White' },
-      { value: 'beige', label: 'Beige' },
-      { value: 'blue', label: 'Blue' },
-      { value: 'brown', label: 'Brown' },
-      { value: 'green', label: 'Green' },
-      { value: 'purple', label: 'Purple' },
-    ],
-  },
-  {
-    id: 'category',
-    name: 'Category',
-    options: [
-      { value: 'new-arrivals', label: 'All New Arrivals' },
-      { value: 'tees', label: 'Tees' },
-      { value: 'crewnecks', label: 'Crewnecks' },
-      { value: 'sweatshirts', label: 'Sweatshirts' },
-      { value: 'pants-shorts', label: 'Pants & Shorts' },
-    ],
-  },
-  {
-    id: 'sizes',
-    name: 'Sizes',
-    options: [
-      { value: 'xs', label: 'XS' },
-      { value: 's', label: 'S' },
-      { value: 'm', label: 'M' },
-      { value: 'l', label: 'L' },
-      { value: 'xl', label: 'XL' },
-      { value: '2xl', label: '2XL' },
+      { value: 'comedy', label: 'Comedy' },
+      { value: 'education', label: 'Education' },
+      { value: 'fiction', label: 'Fiction' },
+      { value: 'religion & spirituality', label: 'Religion & Spirituality' },
+      { value: 'islam', label: 'Islam' },
+      { value: 'news', label: 'News' },
+      { value: 'christianity', label: 'Christianity' },
+      { value: 'business', label: 'Business' },
+      { value: 'careers', label: 'Careers' },
+      { value: 'books', label: 'Books' },
+      { value: 'arts', label: 'Arts' },
+      { value: 'music', label: 'Music' },
+      { value: 'self-improvement', label: 'Self-Improvement' },
+      { value: 'relationships', label: 'Relationships' },
+      { value: 'society & culture', label: 'Society & Culture' },
+      { value: 'parenting', label: 'Parenting' },
+      { value: 'technology', label: 'Technology' },
+      { value: 'leisure', label: 'Leisure' },
     ],
   },
 ]
-const products = [
-  {
-    id: 1,
-    name: 'Basic Tee 8-Pack',
-    href: '#',
-    price: '$256',
-    description:
-      'Get the full lineup of our Basic Tees. Have a fresh shirt all week, and an extra for laundry day.',
-    options: '8 colors',
-    imageSrc:
-      'https://tailwindui.com/img/ecommerce-images/category-page-02-image-card-01.jpg',
-    imageAlt:
-      'Eight shirts arranged on table in black, olive, grey, blue, white, red, mustard, and green.',
-  },
-  {
-    id: 2,
-    name: 'Basic Tee 1',
-    href: '#',
-    price: '$32',
-    description:
-      'Look like a visionary CEO and wear the same black t-shirt every day.',
-    options: 'Black',
-    imageSrc:
-      'https://tailwindui.com/img/ecommerce-images/category-page-02-image-card-02.jpg',
-    imageAlt: 'Front of plain black t-shirt.',
-  },
-  {
-    id: 3,
-    name: 'Basic Tee 2',
-    href: '#',
-    price: '$32',
-    description:
-      'Look like a visionary CEO and wear the same black t-shirt every day.',
-    options: 'Black',
-    imageSrc:
-      'https://tailwindui.com/img/ecommerce-images/category-page-02-image-card-02.jpg',
-    imageAlt: 'Front of plain black t-shirt.',
-  },
-  {
-    id: 4,
-    name: 'Basic Tee 3',
-    href: '#',
-    price: '$32',
-    description:
-      'Look like a visionary CEO and wear the same black t-shirt every day.',
-    options: 'Black',
-    imageSrc:
-      'https://tailwindui.com/img/ecommerce-images/category-page-02-image-card-02.jpg',
-    imageAlt: 'Front of plain black t-shirt.',
-  },
-  // More products...
-]
+
 const footerNavigation = {
   products: [
     { name: 'Bags', href: '#' },
@@ -542,31 +482,6 @@ function HomePage() {
                       Create account
                     </a>
                   </div>
-
-                  {/* Search */}
-                  <div className="flex lg:ml-6">
-                    <a
-                      href="#"
-                      className="p-2 text-gray-400 hover:text-gray-500"
-                    >
-                      <span className="sr-only">Search</span>
-                      <SearchIcon className="w-6 h-6" aria-hidden="true" />
-                    </a>
-                  </div>
-
-                  {/* Cart */}
-                  <div className="ml-4 flow-root lg:ml-6">
-                    <a href="#" className="group -m-2 p-2 flex items-center">
-                      <ShoppingBagIcon
-                        className="flex-shrink-0 h-6 w-6 text-gray-400 group-hover:text-gray-500"
-                        aria-hidden="true"
-                      />
-                      <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">
-                        0
-                      </span>
-                      <span className="sr-only">items in cart, view bag</span>
-                    </a>
-                  </div>
                 </div>
               </div>
             </div>
@@ -719,13 +634,25 @@ function HomePage() {
         </div> */}
 
         <main className="max-w-2xl mx-auto px-4 lg:max-w-7xl lg:px-8">
-          <div className="border-b border-gray-200 pt-24 pb-10">
-            <h1 className="text-4xl font-extrabold tracking-tight text-gray-900">
-              Indo Podcasts
-            </h1>
-            <p className="mt-4 text-base text-gray-500">
-              Lihat rilis podcast Indonesia terbaru
-            </p>
+          <div className="border-b border-gray-200 pt-24 pb-10 ">
+            <div className="flex justify-between items-baseline relative">
+              <div className="w-full">
+                <h1 className="text-4xl font-extrabold tracking-tight text-gray-900">
+                  Indo Podcasts
+                </h1>
+                <p className="mt-4 text-base text-gray-500">
+                  Lihat rilis podcast Indonesia terbaru
+                </p>
+              </div>
+              <Sort className="flex items-center" />
+              <button
+                type="button"
+                className="p-2 -m-2 ml-5 sm:ml-7 text-gray-400 hover:text-gray-500"
+              >
+                <span className="sr-only">View grid</span>
+                <ViewGridIcon className="w-5 h-5" aria-hidden="true" />
+              </button>
+            </div>
           </div>
 
           <div className="pt-12 pb-24 lg:grid lg:grid-cols-3 lg:gap-x-8 xl:grid-cols-4">
@@ -794,44 +721,7 @@ function HomePage() {
                 Products
               </h2>
 
-              <div className="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-10 lg:gap-x-8 xl:grid-cols-3">
-                {products.map((product) => (
-                  <div
-                    key={product.id}
-                    className="group relative bg-white border border-gray-200 rounded-lg flex flex-col overflow-hidden"
-                  >
-                    <div className="aspect-w-3 aspect-h-4 bg-gray-200 group-hover:opacity-75 sm:aspect-none sm:h-96">
-                      <img
-                        src={product.imageSrc}
-                        alt={product.imageAlt}
-                        className="w-full h-full object-center object-cover sm:w-full sm:h-full"
-                      />
-                    </div>
-                    <div className="flex-1 p-4 space-y-2 flex flex-col">
-                      <h3 className="text-sm font-medium text-gray-900">
-                        <a href={product.href}>
-                          <span
-                            aria-hidden="true"
-                            className="absolute inset-0"
-                          />
-                          {product.name}
-                        </a>
-                      </h3>
-                      <p className="text-sm text-gray-500">
-                        {product.description}
-                      </p>
-                      <div className="flex-1 flex flex-col justify-end">
-                        <p className="text-sm italic text-gray-500">
-                          {product.options}
-                        </p>
-                        <p className="text-base font-medium text-gray-900">
-                          {product.price}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
+              <PodcastsCell />
             </section>
           </div>
         </main>

@@ -1,4 +1,5 @@
 import { db } from '$api/src/lib/db'
+import csv from 'csvtojson'
 
 export default async () => {
   try {
@@ -8,15 +9,16 @@ export default async () => {
     //
     // Update "const data = []" to match your data model and seeding needs
     //
-    const data = [
-      // To try this example data with the UserExample model in schema.prisma,
-      // uncomment the lines below and run 'yarn rw prisma migrate dev'
-      //
-      // { name: 'alice', email: 'alice@example.com' },
-      // { name: 'mark', email: 'mark@example.com' },
-      // { name: 'jackie', email: 'jackie@example.com' },
-      // { name: 'bob', email: 'bob@example.com' },
-    ]
+    const jsonObj = await csv().fromFile(
+      '/Users/eganbisma/projects/indopodcasts/indopodcasts100.csv'
+    )
+    const data = jsonObj.map((podcast) => ({
+      name: podcast.title,
+      description: podcast.description,
+      image_url: podcast.artwork_image,
+      genres: podcast.genres.split(','),
+    }))
+
     console.log(
       "\nUsing the default './scripts/seed.js' template\nEdit the file to add seed data\n"
     )
@@ -28,8 +30,8 @@ export default async () => {
       // Change to match your data model and seeding needs
       //
       data.map(async (userExample) => {
-        const record = await db.userExample.create({
-          data: { name: userExample.name, email: userExample.email },
+        const record = await db.podcast.create({
+          data: { ...userExample },
         })
 
         console.log(record)
