@@ -1,4 +1,6 @@
 import { MetaTags } from '@redwoodjs/web'
+import { Form, TextField, Submit } from '@redwoodjs/forms'
+
 import { Fragment, useState } from 'react'
 import SearchBar from 'src/components/SearchBar/SearchBar'
 import { Dialog, Disclosure, Popover, Tab, Transition } from '@headlessui/react'
@@ -78,32 +80,6 @@ const navigation = {
 }
 const breadcrumbs = [
   // { id: 1, name: 'Men', href: '#' }
-]
-const filters = [
-  {
-    id: 'genre',
-    name: 'Genre',
-    options: [
-      { value: 'comedy', label: 'Comedy' },
-      { value: 'education', label: 'Education' },
-      { value: 'fiction', label: 'Fiction' },
-      { value: 'religion & spirituality', label: 'Religion & Spirituality' },
-      { value: 'islam', label: 'Islam' },
-      { value: 'news', label: 'News' },
-      { value: 'christianity', label: 'Christianity' },
-      { value: 'business', label: 'Business' },
-      { value: 'careers', label: 'Careers' },
-      { value: 'books', label: 'Books' },
-      { value: 'arts', label: 'Arts' },
-      { value: 'music', label: 'Music' },
-      { value: 'self-improvement', label: 'Self-Improvement' },
-      { value: 'relationships', label: 'Relationships' },
-      { value: 'society & culture', label: 'Society & Culture' },
-      { value: 'parenting', label: 'Parenting' },
-      { value: 'technology', label: 'Technology' },
-      { value: 'leisure', label: 'Leisure' },
-    ],
-  },
 ]
 
 const footerNavigation = {
@@ -194,7 +170,7 @@ function HomePage() {
                           className={({ selected }) =>
                             classNames(
                               selected
-                                ? 'text-indigo-600 border-indigo-600'
+                                ? 'text-green-600 border-green-600'
                                 : 'text-gray-900 border-transparent',
                               'flex-1 whitespace-nowrap py-4 px-1 border-b-2 text-base font-medium'
                             )
@@ -308,7 +284,7 @@ function HomePage() {
         </Transition.Root>
 
         <header className="relative bg-white">
-          <p className="bg-indigo-600 h-10 flex items-center justify-center text-sm font-medium text-white px-4 sm:px-6 lg:px-8">
+          <p className="bg-green-600 h-10 flex items-center justify-center text-sm font-medium text-white px-4 sm:px-6 lg:px-8">
             Get free delivery on orders over $100
           </p>
 
@@ -333,7 +309,7 @@ function HomePage() {
                     <span className="sr-only">Workflow</span>
                     <img
                       className="h-8 w-auto"
-                      src="https://tailwindui.com/img/logos/workflow-mark.svg?color=indigo&shade=600"
+                      src="https://tailwindui.com/img/logos/workflow-mark.svg?color=green&shade=600"
                       alt=""
                     />
                   </a>
@@ -353,7 +329,7 @@ function HomePage() {
                               <Popover.Button
                                 className={classNames(
                                   open
-                                    ? 'border-indigo-600 text-indigo-600'
+                                    ? 'border-green-600 text-green-600'
                                     : 'border-transparent text-gray-700 hover:text-gray-800',
                                   'relative z-10 flex items-center transition-colors ease-out duration-200 text-sm font-medium border-b-2 -mb-px pt-px'
                                 )}
@@ -530,62 +506,6 @@ function HomePage() {
                     <XIcon className="h-6 w-6" aria-hidden="true" />
                   </button>
                 </div>
-
-                {/* Filters */}
-                <form className="mt-4">
-                  {filters.map((section) => (
-                    <Disclosure
-                      as="div"
-                      key={section.name}
-                      className="border-t border-gray-200 pt-4 pb-4"
-                    >
-                      {({ open }) => (
-                        <fieldset>
-                          <legend className="w-full px-2">
-                            <Disclosure.Button className="w-full p-2 flex items-center justify-between text-gray-400 hover:text-gray-500">
-                              <span className="text-sm font-medium text-gray-900">
-                                {section.name}
-                              </span>
-                              <span className="ml-6 h-7 flex items-center">
-                                <ChevronDownIcon
-                                  className={classNames(
-                                    open ? '-rotate-180' : 'rotate-0',
-                                    'h-5 w-5 transform'
-                                  )}
-                                  aria-hidden="true"
-                                />
-                              </span>
-                            </Disclosure.Button>
-                          </legend>
-                          <Disclosure.Panel className="pt-4 pb-2 px-4">
-                            <div className="space-y-6">
-                              {section.options.map((option, optionIdx) => (
-                                <div
-                                  key={option.value}
-                                  className="flex items-center"
-                                >
-                                  <input
-                                    id={`${section.id}-${optionIdx}-mobile`}
-                                    name={`${section.id}[]`}
-                                    defaultValue={option.value}
-                                    type="checkbox"
-                                    className="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500"
-                                  />
-                                  <label
-                                    htmlFor={`${section.id}-${optionIdx}-mobile`}
-                                    className="ml-3 text-sm text-gray-500"
-                                  >
-                                    {option.label}
-                                  </label>
-                                </div>
-                              ))}
-                            </div>
-                          </Disclosure.Panel>
-                        </fieldset>
-                      )}
-                    </Disclosure>
-                  ))}
-                </form>
               </div>
             </Transition.Child>
           </Dialog>
@@ -641,7 +561,7 @@ function HomePage() {
                   Indo Podcasts
                 </h1>
                 <p className="mt-4 text-base text-gray-500">
-                  Lihat rilis podcast Indonesia terbaru
+                  Lihat rilis podcast-podcast dari Indonesia yang terpopuler
                 </p>
               </div>
               <Sort className="flex items-center" />
@@ -655,64 +575,7 @@ function HomePage() {
             </div>
           </div>
 
-          <div className="pt-12 pb-24 lg:grid lg:grid-cols-3 lg:gap-x-8 xl:grid-cols-4">
-            <aside>
-              <h2 className="sr-only">Filters</h2>
-
-              <button
-                type="button"
-                className="inline-flex items-center lg:hidden"
-                onClick={() => setMobileFiltersOpen(true)}
-              >
-                <span className="text-sm font-medium text-gray-700">
-                  Filters
-                </span>
-                <PlusSmIcon
-                  className="flex-shrink-0 ml-1 h-5 w-5 text-gray-400"
-                  aria-hidden="true"
-                />
-              </button>
-
-              <div className="hidden lg:block">
-                <form className="divide-y divide-gray-200 space-y-10">
-                  {filters.map((section, sectionIdx) => (
-                    <div
-                      key={section.name}
-                      className={sectionIdx === 0 ? null : 'pt-10'}
-                    >
-                      <fieldset>
-                        <legend className="block text-sm font-medium text-gray-900">
-                          {section.name}
-                        </legend>
-                        <div className="pt-6 space-y-3">
-                          {section.options.map((option, optionIdx) => (
-                            <div
-                              key={option.value}
-                              className="flex items-center"
-                            >
-                              <input
-                                id={`${section.id}-${optionIdx}`}
-                                name={`${section.id}[]`}
-                                defaultValue={option.value}
-                                type="checkbox"
-                                className="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500"
-                              />
-                              <label
-                                htmlFor={`${section.id}-${optionIdx}`}
-                                className="ml-3 text-sm text-gray-600"
-                              >
-                                {option.label}
-                              </label>
-                            </div>
-                          ))}
-                        </div>
-                      </fieldset>
-                    </div>
-                  ))}
-                </form>
-              </div>
-            </aside>
-
+          <div className="pt-12 pb-24 lg:grid lg:grid-cols-1 lg:gap-x-8 xl:grid-cols-1">
             <section
               aria-labelledby="product-heading"
               className="mt-6 lg:mt-0 lg:col-span-2 xl:col-span-3"
@@ -819,12 +682,12 @@ function HomePage() {
                       type="text"
                       autoComplete="email"
                       required
-                      className="appearance-none min-w-0 w-full bg-white border border-gray-300 rounded-md shadow-sm py-2 px-4 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                      className="appearance-none min-w-0 w-full bg-white border border-gray-300 rounded-md shadow-sm py-2 px-4 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500"
                     />
                     <div className="ml-4 flex-shrink-0">
                       <button
                         type="submit"
-                        className="w-full bg-indigo-600 border border-transparent rounded-md shadow-sm py-2 px-4 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                        className="w-full bg-green-600 border border-transparent rounded-md shadow-sm py-2 px-4 flex items-center justify-center text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
                       >
                         Sign up
                       </button>

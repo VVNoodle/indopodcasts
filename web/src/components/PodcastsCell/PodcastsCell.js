@@ -22,13 +22,9 @@ export const Failure = ({ error }) => (
 
 export const Success = ({ podcasts }) => {
   return (
-    <ul className="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-10 lg:gap-x-8 xl:grid-cols-3">
+    <ul className="grid grid-cols-1 gap-y-2 sm:grid-cols-2 sm:gap-x-2 sm:gap-y-4 lg:gap-x-4 xl:grid-cols-3">
       {podcasts.map((podcast) => {
-        return (
-          <li key={podcast.id}>
-            <PodcastCard product={podcast} />
-          </li>
-        )
+        return <PodcastCard key={podcast.id} product={podcast} />
       })}
     </ul>
   )

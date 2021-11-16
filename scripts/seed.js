@@ -12,7 +12,10 @@ export default async () => {
     const jsonObj = await csv().fromFile(
       '/Users/eganbisma/projects/indopodcasts/indopodcasts100.csv'
     )
-    const data = jsonObj.map((podcast) => ({
+    const jsonObj1 = await csv().fromFile(
+      '/Users/eganbisma/projects/indopodcasts/indopocasts_popular.csv'
+    )
+    const data = [...jsonObj, ...jsonObj1].map((podcast) => ({
       name: podcast.title,
       description: podcast.description,
       image_url: podcast.artwork_image,
