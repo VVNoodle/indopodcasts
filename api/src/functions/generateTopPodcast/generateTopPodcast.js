@@ -20,23 +20,28 @@ import { db } from 'src/lib/db'
  * function, and execution environment.
  */
 export const handler = async (event, context) => {
-  logger.info('Invoked generateTopPodcasts function')
+  logger.info('Invoked generateTopPodcast function')
 
-  const podcasts = await db.podcast.groupBy({
-    by: ['genres'],
-    where: {
-      genres: {
-        isEmpty: false,
-      },
-    },
-    // orderBy: [
-    //   {
-    //     popularity: 'desc',
-    //   },
-    //   {
-    //     name: 'desc',
-    //   },
-    // ],
+  const podcasts = await db.$queryRaw`
+    SELECT name, description, genres, image_url, popularity, rownum FROM (
+      SELECT *, row_number() OVER (PARTITION BY genres ORDER BY popularity DESC) AS rownum
+      FROM (
+        SELECT name, description, image_url, popularity, genres
+          FROM  (
+            SELECT name, description, image_url, popularity
+                  , unnest(genres) AS genres
+            FROM "public"."Podcast"
+            ) sub
+          WHERE  genres <> ''
+          ORDER  BY name, genres
+      ) p
+    ) a
+    where rownum <= 5;
+  `
+
+  await db.topPodcast.deleteMany()
+  await db.topPodcast.createMany({
+    data: podcasts,
   })
 
   return {

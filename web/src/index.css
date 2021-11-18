@@ -4,3 +4,7 @@
 /* purgecss end ignore */
 
 @tailwind  utilities;
+
+.new-row {
+  grid-column-start: 1;
+}

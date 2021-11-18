@@ -11,7 +11,7 @@ import {
   ViewGridIcon,
 } from '@heroicons/react/solid'
 
-import PodcastsCell from 'src/components/PodcastsCell'
+import TopPodcastsCell from 'src/components/TopPodcastsCell'
 import Sort from 'src/components/Sort'
 
 const navigation = {
@@ -584,7 +584,7 @@ function HomePage() {
                 Products
               </h2>
 
-              <PodcastsCell />
+              <TopPodcastsCell />
             </section>
           </div>
         </main>

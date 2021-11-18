@@ -1,5 +1,35 @@
+/* eslint-disable no-undef */
 import { db } from '$api/src/lib/db'
 import csv from 'csvtojson'
+
+const dumpGenres = {
+  'Alternative Health': 'Health and Fitness',
+  'Business News': 'Business',
+  'Comedy Interviews': 'Comedy',
+  'Higher Education': 'Education',
+  'Language Learning': 'Education',
+  Spirituality: 'Religion & Spirituality',
+  Religion: 'Religion & Spirituality',
+  'Tech News': 'News',
+  'Daily News': 'News',
+  Football: 'News',
+  Basketball: 'Sports',
+}
+
+const filterGenres = (genres) => {
+  const finalGenres = new Set()
+  for (let index = 0; index < genres.length; index++) {
+    const currentGenre = genres[index].trim()
+    if (Object.prototype.hasOwnProperty.call(dumpGenres, currentGenre)) {
+      console.log('ish', currentGenre)
+      finalGenres.add(dumpGenres[currentGenre])
+    } else {
+      finalGenres.add(currentGenre)
+    }
+  }
+
+  return Array.from(finalGenres)
+}
 
 export default async () => {
   try {
@@ -15,17 +45,21 @@ export default async () => {
     const jsonObj1 = await csv().fromFile(
       '/Users/eganbisma/projects/indopodcasts/indopocasts_popular.csv'
     )
-    const data = [...jsonObj, ...jsonObj1].map((podcast) => ({
-      name: podcast.title,
-      description: podcast.description,
-      image_url: podcast.artwork_image,
-      genres: podcast.genres.split(','),
-    }))
+    const data = [...jsonObj, ...jsonObj1].map((podcast) => {
+      return {
+        name: podcast.title,
+        description: podcast.description,
+        image_url: podcast.artwork_image,
+        genres: filterGenres(podcast.genres.split(',')),
+        popularity: podcast.listen_score ? parseInt(podcast.listen_score) : 0,
+      }
+    })
 
     console.log(
       "\nUsing the default './scripts/seed.js' template\nEdit the file to add seed data\n"
     )
 
+    await db.topPodcast.deleteMany()
     // Note: if using PostgreSQL, using `createMany` to insert multiple records is much faster
     // @see: https://www.prisma.io/docs/reference/api-reference/prisma-client-reference#createmany
     Promise.all(

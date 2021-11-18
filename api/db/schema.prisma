@@ -16,14 +16,15 @@ model Podcast {
   description String
   genres      String[]
   image_url   String
-  popularity  Decimal  @default(0)
+  popularity  Int      @default(0)
 }
 
-model TopPodcasts {
+model TopPodcast {
   id          Int      @id @default(autoincrement())
-  name        String   @unique
+  name        String
   description String
   genres      String[]
   image_url   String
-  popularity  Decimal  @default(0)
+  popularity  Int      @default(0)
+  rownum      Int
 }
