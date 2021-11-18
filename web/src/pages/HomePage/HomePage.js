@@ -1,15 +1,8 @@
-import { MetaTags } from '@redwoodjs/web'
-import { Form, TextField, Submit } from '@redwoodjs/forms'
-
 import { Fragment, useState } from 'react'
 import SearchBar from 'src/components/SearchBar/SearchBar'
-import { Dialog, Disclosure, Popover, Tab, Transition } from '@headlessui/react'
+import { Dialog, Popover, Tab, Transition } from '@headlessui/react'
 import { MenuIcon, XIcon } from '@heroicons/react/outline'
-import {
-  ChevronDownIcon,
-  PlusSmIcon,
-  ViewGridIcon,
-} from '@heroicons/react/solid'
+import { ViewGridIcon } from '@heroicons/react/solid'
 
 import TopPodcastsCell from 'src/components/TopPodcastsCell'
 import Sort from 'src/components/Sort'
@@ -78,9 +71,6 @@ const navigation = {
   ],
   pages: [],
 }
-const breadcrumbs = [
-  // { id: 1, name: 'Men', href: '#' }
-]
 
 const footerNavigation = {
   products: [
@@ -225,7 +215,6 @@ function HomePage() {
                               {section.name}
                             </p>
                             <ul
-                              role="list"
                               aria-labelledby={`${category.id}-${section.id}-heading-mobile`}
                               className="mt-6 flex flex-col space-y-6"
                             >
@@ -399,7 +388,6 @@ function HomePage() {
                                               {section.name}
                                             </p>
                                             <ul
-                                              role="list"
                                               aria-labelledby={`${section.name}-heading`}
                                               className="mt-6 space-y-6 sm:mt-4 sm:space-y-4"
                                             >
@@ -615,7 +603,7 @@ function HomePage() {
                       <h3 className="text-sm font-medium text-gray-900">
                         Products
                       </h3>
-                      <ul role="list" className="mt-6 space-y-6">
+                      <ul className="mt-6 space-y-6">
                         {footerNavigation.products.map((item) => (
                           <li key={item.name} className="text-sm">
                             <a
@@ -632,7 +620,7 @@ function HomePage() {
                       <h3 className="text-sm font-medium text-gray-900">
                         Company
                       </h3>
-                      <ul role="list" className="mt-6 space-y-6">
+                      <ul className="mt-6 space-y-6">
                         {footerNavigation.company.map((item) => (
                           <li key={item.name} className="text-sm">
                             <a

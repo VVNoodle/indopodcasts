@@ -9,6 +9,17 @@ module.exports = {
         sans: ['Inter var', ...defaultTheme.fontFamily.sans],
       },
     },
+    maxWidth: {
+      0: '0',
+      50: '200px',
+      half: '50%',
+      full: '100%',
+    },
+    maxHeight: {
+      0: '0',
+      50: '200px',
+      full: '100%',
+    },
   },
   variants: {
     extend: {},

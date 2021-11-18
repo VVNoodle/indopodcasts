@@ -21,7 +21,6 @@ const filterGenres = (genres) => {
   for (let index = 0; index < genres.length; index++) {
     const currentGenre = genres[index].trim()
     if (Object.prototype.hasOwnProperty.call(dumpGenres, currentGenre)) {
-      console.log('ish', currentGenre)
       finalGenres.add(dumpGenres[currentGenre])
     } else {
       finalGenres.add(currentGenre)
@@ -40,10 +39,12 @@ export default async () => {
     // Update "const data = []" to match your data model and seeding needs
     //
     const jsonObj = await csv().fromFile(
-      '/Users/eganbisma/projects/indopodcasts/indopodcasts100.csv'
+      // '/Users/eganbisma/projects/indopodcasts/indopodcasts100.csv'
+      'C:/Users\\Admin\\Projects\\indopodcast\\indopodcasts100.csv'
     )
     const jsonObj1 = await csv().fromFile(
-      '/Users/eganbisma/projects/indopodcasts/indopocasts_popular.csv'
+      // '/Users/eganbisma/projects/indopodcasts/indopocasts_popular.csv'
+      'C:/Users\\Admin\\Projects\\indopodcast\\indopodcasts100MostEpisodes.csv'
     )
     const data = [...jsonObj, ...jsonObj1].map((podcast) => {
       return {

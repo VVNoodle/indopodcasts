@@ -25,27 +25,45 @@ export const Failure = ({ error }) => (
 export const Success = ({ topPodcasts }) => {
   let genreBefore = null
 
-  const foo = () => {
-    const abc = []
+  const content = () => {
+    const group = []
+    let list = []
     topPodcasts.forEach((podcast) => {
       if (podcast.genres[0] === genreBefore) {
-        abc.push(<PodcastCard key={podcast.id} product={podcast} />)
+        list.push(
+          <div key={podcast.id}>
+            <PodcastCard product={podcast} />
+          </div>
+        )
       } else {
         genreBefore = podcast.genres[0]
-        abc.push(
-          <li className="col-span-full">
-            <h2 className="font-bold">Podcast Populer dalam {genreBefore}</h2>
+        group.push(
+          <li key={`f${podcast.id}`} className="flex">
+            {list}
           </li>
         )
-        abc.push(
-          <li>
-            <PodcastCard key={podcast.id} product={podcast} />
+        list = []
+        group.push(
+          <li className="col-span-full mt-6">
+            <h2 className="font-bold text-gray-700 text-lg">
+              Podcast Populer dalam {genreBefore}
+            </h2>
           </li>
+        )
+        list.push(
+          <div key={podcast.id}>
+            <PodcastCard product={podcast} />
+          </div>
         )
       }
     })
+    group.push(
+      <li key={`last`} className="flex">
+        {list}
+      </li>
+    )
 
-    return abc
+    return group
   }
-  return <ul className="grid sm:grid-cols-4 md:grid-cols-6">{foo()}</ul>
+  return <ul className="flex flex-col">{content()}</ul>
 }
