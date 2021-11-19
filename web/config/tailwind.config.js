@@ -8,6 +8,17 @@ module.exports = {
       fontFamily: {
         sans: ['Inter var', ...defaultTheme.fontFamily.sans],
       },
+      gridTemplateRows: {
+        podcast: '1fr 4em',
+      },
+      fontSize: {
+        '2xs': [
+          '0.7rem',
+          {
+            lineHeight: '0.75rem',
+          },
+        ],
+      },
     },
     maxWidth: {
       0: '0',

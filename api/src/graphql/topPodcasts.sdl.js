@@ -7,6 +7,7 @@ export const schema = gql`
     image_url: String!
     popularity: Int!
     rownum: Int!
+    publisher: String!
   }
 
   type Query {
@@ -20,6 +21,7 @@ export const schema = gql`
     image_url: String!
     popularity: Int!
     rownum: Int!
+    publisher: String!
   }
 
   input UpdateTopPodcastInput {
@@ -29,5 +31,6 @@ export const schema = gql`
     image_url: String
     popularity: Int
     rownum: Int!
+    publisher: String!
   }
 `

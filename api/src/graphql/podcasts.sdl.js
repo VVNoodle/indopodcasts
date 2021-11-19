@@ -9,6 +9,7 @@ export const schema = gql`
 
   type Query {
     podcasts: [Podcast!]! @requireAuth
+    podcast(name: String!): Podcast @requireAuth
   }
 
   input CreatePodcastInput {

@@ -5,6 +5,7 @@ export const QUERY = gql`
     topPodcasts {
       id
       name
+      publisher
       genres
       description
       image_url
@@ -38,14 +39,14 @@ export const Success = ({ topPodcasts }) => {
       } else {
         genreBefore = podcast.genres[0]
         group.push(
-          <li key={`f${podcast.id}`} className="flex">
+          <li key={`f${podcast.id}`} className="flex gap-6">
             {list}
           </li>
         )
         list = []
         group.push(
-          <li className="col-span-full mt-6">
-            <h2 className="font-bold text-gray-700 text-lg">
+          <li className="col-span-full mt-6 mb-4">
+            <h2 className="font-light text-gray-800 text-lg">
               Podcast Populer dalam {genreBefore}
             </h2>
           </li>

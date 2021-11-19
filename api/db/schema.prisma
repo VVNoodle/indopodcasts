@@ -13,6 +13,7 @@ generator client {
 model Podcast {
   id          Int      @id @default(autoincrement())
   name        String   @unique
+  publisher   String   @unique
   description String
   genres      String[]
   image_url   String
@@ -22,6 +23,7 @@ model Podcast {
 model TopPodcast {
   id          Int      @id @default(autoincrement())
   name        String
+  publisher   String   @default("")
   description String
   genres      String[]
   image_url   String

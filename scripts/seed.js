@@ -3,9 +3,11 @@ import { db } from '$api/src/lib/db'
 import csv from 'csvtojson'
 
 const dumpGenres = {
-  'Alternative Health': 'Health and Fitness',
+  'Alternative Health': 'Health & Fitness',
+  Nutrition: 'Health & Fitness',
   'Business News': 'Business',
   'Comedy Interviews': 'Comedy',
+  'Comedy Fiction': 'Comedy',
   'Higher Education': 'Education',
   'Language Learning': 'Education',
   Spirituality: 'Religion & Spirituality',
@@ -39,12 +41,12 @@ export default async () => {
     // Update "const data = []" to match your data model and seeding needs
     //
     const jsonObj = await csv().fromFile(
-      // '/Users/eganbisma/projects/indopodcasts/indopodcasts100.csv'
-      'C:/Users\\Admin\\Projects\\indopodcast\\indopodcasts100.csv'
+      '/Users/eganbisma/projects/indopodcasts/indopodcasts100.csv'
+      // 'C:/Users\\Admin\\Projects\\indopodcast\\indopodcasts100.csv'
     )
     const jsonObj1 = await csv().fromFile(
-      // '/Users/eganbisma/projects/indopodcasts/indopocasts_popular.csv'
-      'C:/Users\\Admin\\Projects\\indopodcast\\indopodcasts100MostEpisodes.csv'
+      '/Users/eganbisma/projects/indopodcasts/indopocasts_popular.csv'
+      // 'C:/Users\\Admin\\Projects\\indopodcast\\indopodcasts100MostEpisodes.csv'
     )
     const data = [...jsonObj, ...jsonObj1].map((podcast) => {
       return {
@@ -53,6 +55,7 @@ export default async () => {
         image_url: podcast.artwork_image,
         genres: filterGenres(podcast.genres.split(',')),
         popularity: podcast.listen_score ? parseInt(podcast.listen_score) : 0,
+        publisher: podcast.publisher,
       }
     })
 
@@ -60,7 +63,8 @@ export default async () => {
       "\nUsing the default './scripts/seed.js' template\nEdit the file to add seed data\n"
     )
 
-    await db.topPodcast.deleteMany()
+    await db.podcast.deleteMany()
+
     // Note: if using PostgreSQL, using `createMany` to insert multiple records is much faster
     // @see: https://www.prisma.io/docs/reference/api-reference/prisma-client-reference#createmany
     Promise.all(
