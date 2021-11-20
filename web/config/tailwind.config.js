@@ -8,8 +8,8 @@ module.exports = {
       fontFamily: {
         sans: ['Inter var', ...defaultTheme.fontFamily.sans],
       },
-      gridTemplateRows: {
-        podcast: '1fr 4em',
+      gridTemplateColumns: {
+        episode: '80px auto',
       },
       fontSize: {
         '2xs': [
@@ -38,5 +38,6 @@ module.exports = {
   plugins: [
     require('@tailwindcss/forms'),
     require('@tailwindcss/aspect-ratio'),
+    require('@tailwindcss/line-clamp'),
   ],
 }

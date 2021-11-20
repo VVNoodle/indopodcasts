@@ -41,12 +41,12 @@ export default async () => {
     // Update "const data = []" to match your data model and seeding needs
     //
     const jsonObj = await csv().fromFile(
-      '/Users/eganbisma/projects/indopodcasts/indopodcasts100.csv'
-      // 'C:/Users\\Admin\\Projects\\indopodcast\\indopodcasts100.csv'
+      // '/Users/eganbisma/projects/indopodcasts/indopodcasts100.csv'
+      'C:/Users\\Admin\\Projects\\indopodcast\\indopodcasts100.csv'
     )
     const jsonObj1 = await csv().fromFile(
-      '/Users/eganbisma/projects/indopodcasts/indopocasts_popular.csv'
-      // 'C:/Users\\Admin\\Projects\\indopodcast\\indopodcasts100MostEpisodes.csv'
+      // '/Users/eganbisma/projects/indopodcasts/indopocasts_popular.csv'
+      'C:/Users\\Admin\\Projects\\indopodcast\\indopodcasts100MostEpisodes.csv'
     )
     const data = [...jsonObj, ...jsonObj1].map((podcast) => {
       return {
@@ -56,6 +56,7 @@ export default async () => {
         genres: filterGenres(podcast.genres.split(',')),
         popularity: podcast.listen_score ? parseInt(podcast.listen_score) : 0,
         publisher: podcast.publisher,
+        rss: podcast.rss,
       }
     })
 

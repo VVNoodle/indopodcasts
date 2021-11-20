@@ -5,6 +5,7 @@ export const schema = gql`
     description: String!
     genres: [String]!
     image_url: String!
+    rss: String!
   }
 
   type Query {

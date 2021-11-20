@@ -436,74 +436,9 @@ export default function GlobalLayout({ children }) {
             </Transition.Child>
           </Dialog>
         </Transition.Root>
-        {/*
-        <div className="border-b border-gray-200">
-          <nav
-            aria-label="Breadcrumb"
-            className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
-          >
-            <ol role="list" className="flex items-center space-x-4 py-4">
-              {breadcrumbs.map((breadcrumb) => (
-                <li key={breadcrumb.id}>
-                  <div className="flex items-center">
-                    <a
-                      href={breadcrumb.href}
-                      className="mr-4 text-sm font-medium text-gray-900"
-                    >
-                      {breadcrumb.name}
-                    </a>
-                    <svg
-                      viewBox="0 0 6 20"
-                      xmlns="http://www.w3.org/2000/svg"
-                      aria-hidden="true"
-                      className="h-5 w-auto text-gray-300"
-                    >
-                      <path
-                        d="M4.878 4.34H3.551L.27 16.532h1.327l3.281-12.19z"
-                        fill="currentColor"
-                      />
-                    </svg>
-                  </div>
-                </li>
-              ))}
-              <li className="text-sm">
-                <a
-                  href="#"
-                  aria-current="page"
-                  className="font-medium text-gray-500 hover:text-gray-600"
-                >
-                  Indo Podcasts
-                </a>
-              </li>
-            </ol>
-          </nav>
-        </div> */}
 
         <main className="max-w-2xl mx-auto px-4 lg:max-w-7xl lg:px-8">
-          <div className="border-b border-gray-200 pt-24 pb-10 ">
-            {/* <div className="flex justify-between items-baseline relative">
-              <div className="w-full">
-                <h1 className="text-4xl font-extrabold tracking-tight text-gray-900">
-                  Indo Podcasts
-                </h1>
-                <p className="mt-4 text-base text-gray-500">
-                  Lihat rilis podcast-podcast dari Indonesia yang terpopuler
-                </p>
-              </div>
-              <Sort className="flex items-center" />
-              <button
-                type="button"
-                className="p-2 -m-2 ml-5 sm:ml-7 text-gray-400 hover:text-gray-500"
-              >
-                <span className="sr-only">View grid</span>
-                <ViewGridIcon className="w-5 h-5" aria-hidden="true" />
-              </button>
-            </div> */}
-          </div>
-
-          <div className="pt-12 pb-24 lg:grid lg:grid-cols-1 lg:gap-x-8 xl:grid-cols-1">
-            {children}
-          </div>
+          {children}
         </main>
 
         <footer
