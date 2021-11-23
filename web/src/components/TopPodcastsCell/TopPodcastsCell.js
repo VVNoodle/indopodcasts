@@ -31,11 +31,7 @@ export const Success = ({ topPodcasts }) => {
     let list = []
     topPodcasts.forEach((podcast) => {
       if (podcast.genres[0] === genreBefore) {
-        list.push(
-          <div key={podcast.id}>
-            <PodcastCard product={podcast} />
-          </div>
-        )
+        list.push(<PodcastCard key={podcast.id} product={podcast} />)
       } else {
         genreBefore = podcast.genres[0]
         group.push(
@@ -45,17 +41,16 @@ export const Success = ({ topPodcasts }) => {
         )
         list = []
         group.push(
-          <li className="col-span-full mt-6 mb-4">
+          <li
+            key={`${genreBefore}${podcast.id}`}
+            className="col-span-full mt-6 mb-4"
+          >
             <h2 className="font-light text-gray-800 text-lg">
               Podcast Populer dalam {genreBefore}
             </h2>
           </li>
         )
-        list.push(
-          <div key={podcast.id}>
-            <PodcastCard product={podcast} />
-          </div>
-        )
+        list.push(<PodcastCard key={podcast.id} product={podcast} />)
       }
     })
     group.push(

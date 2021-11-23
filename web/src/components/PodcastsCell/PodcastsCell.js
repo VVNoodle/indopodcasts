@@ -8,6 +8,7 @@ export const QUERY = gql`
       genres
       description
       image_url
+      rss
     }
   }
 `

@@ -3,7 +3,7 @@ import { Link, routes } from '@redwoodjs/router'
 const PodcastCard = ({ product }) => {
   return (
     <Link to={routes.podcastDetail({ name: encodeURIComponent(product.name) })}>
-      <li className={`bg-white rounded-lg`}>
+      <div className={`bg-white rounded-lg`}>
         <div className="w-full grid grid-rows-podcast max-w-50">
           <img
             className="shadow w-32 h-32 max-h-50 max-w-50 bg-gray-300 rounded-md row-start-1"
@@ -17,7 +17,7 @@ const PodcastCard = ({ product }) => {
             </div>
           </div>
         </div>
-      </li>
+      </div>
     </Link>
   )
 }
