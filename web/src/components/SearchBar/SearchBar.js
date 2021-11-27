@@ -8,12 +8,12 @@ import Autocomplete from '../Autocomplete/Autocomplete'
 
 const typesenseInstantsearchAdapter = new TypesenseInstantSearchAdapter({
   server: {
-    apiKey: 'xyz', // Be sure to use the search-only-api-key
+    apiKey: process.env.TYPESENSE_APIKEY, // Be sure to use the search-only-api-key
     nodes: [
       {
-        host: 'localhost',
-        port: '8108',
-        protocol: 'http',
+        host: process.env.TYPESENSE_HOST,
+        port: process.env.TYPESENSE_PORT,
+        protocol: process.env.TYPESENSE_PROTOCOL,
       },
     ],
   },
