@@ -1,11 +1,9 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Fragment } from 'react'
 
-import PodcastPlayer from '../PodcastPlayer/PodcastPlayer'
 const { parse } = require('rss-to-json')
 
-export default function EpisodeList({ rss }) {
+export default function EpisodeList({ rss, pickEpisode }) {
   const [episodes, setEpisodes] = useState([])
-  const [chosenEpisode, setChosenEpisode] = useState({})
 
   useEffect(() => {
     async function getEpisodes() {
@@ -29,8 +27,7 @@ export default function EpisodeList({ rss }) {
               <div className="relative focus-within:ring-2 focus-within:ring-indigo-500  col-start-2">
                 <button
                   onClick={() => {
-                    setChosenEpisode(episode)
-                    console.log(chosenEpisode)
+                    pickEpisode(episode)
                   }}
                 >
                   <h3 className="text-sm font-semibold text-gray-800">
@@ -39,20 +36,16 @@ export default function EpisodeList({ rss }) {
                     {episode.title}
                   </h3>
                 </button>
-                <p className="mt-1 text-sm text-gray-600 line-clamp-2">
-                  {episode.description}
-                </p>
+                <div className="mt-1 text-sm text-gray-600 line-clamp-2">
+                  <div
+                    dangerouslySetInnerHTML={{ __html: episode.description }}
+                  />
+                </div>
               </div>
             </li>
           ))}
         </ul>
       </div>
-      <PodcastPlayer
-        streamUrl={
-          chosenEpisode.enclosures ? chosenEpisode.enclosures[0].url : ''
-        }
-        trackTitle={chosenEpisode.title}
-      />
     </div>
   )
 }

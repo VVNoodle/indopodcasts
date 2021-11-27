@@ -1,10 +1,9 @@
 /* This example requires Tailwind CSS v2.0+ */
-import GlobalLayout from 'src/layouts/GlobalLayout/GlobalLayout'
 import EpisodeList from '../EpisodeList/EpisodeList'
 
-export default function PodcastDetail({ podcast }) {
+export default function PodcastDetail({ podcast, pickEpisode }) {
   return (
-    <GlobalLayout>
+    <>
       <div className="border-b border-gray-200 pt-24 pb-10 ">
         <div className="flex justify-between relative">
           <div className="w-auto mr-5">
@@ -25,10 +24,9 @@ export default function PodcastDetail({ podcast }) {
           </div>
         </div>
       </div>
-
       <div className="mt-10">
-        <EpisodeList rss={podcast.rss}></EpisodeList>
+        <EpisodeList rss={podcast.rss} pickEpisode={pickEpisode}></EpisodeList>
       </div>
-    </GlobalLayout>
+    </>
   )
 }

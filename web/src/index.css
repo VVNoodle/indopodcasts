@@ -33,12 +33,30 @@
   width: 100%;
 }
 
+#redwood-app  {
+  background-color:rgb(235, 235, 235);
+}
 
 
 
 
-body { font-family: sans-serif; padding: 1em; }
+
 .ais-SearchBox { margin: 1em 0; }
 .ais-Pagination { margin-top: 1em }
 .left-panel { float: left; width: 250px; }
 .right-panel { margin-left: 260px; }
+
+.sb-soundplayer-progress-container {
+    background-color: rgb(190, 190, 190);
+    width: 100%;
+    height: 20px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.sb-soundplayer-progress-inner {
+    background-color: rgba(5, 150, 105, var(--tw-bg-opacity));
+    height: 100%;
+    -webkit-transition: width .2s ease-in;
+            transition: width .2s ease-in;
+}

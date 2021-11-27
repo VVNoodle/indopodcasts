@@ -20,6 +20,6 @@ export const Failure = ({ error }) => (
   <div style={{ color: 'red' }}>Error: {error.message}</div>
 )
 
-export const Success = ({ podcast }) => {
-  return <PodcastDetail podcast={podcast} />
+export const Success = ({ podcast, pickEpisode }) => {
+  return <PodcastDetail podcast={podcast} pickEpisode={pickEpisode} />
 }

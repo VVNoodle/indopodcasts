@@ -1,52 +1,31 @@
-import { Fragment, useState } from 'react'
+import { Fragment, useState, createContext } from 'react'
 import { Link, routes } from '@redwoodjs/router'
 
 import SearchBar from 'src/components/SearchBar/SearchBar'
-import { Dialog, Popover, Tab, Transition } from '@headlessui/react'
+import { Dialog, Tab, Transition } from '@headlessui/react'
 import { MenuIcon, XIcon } from '@heroicons/react/outline'
-
+import PodcastPlayer from 'src/components/PodcastPlayer/PodcastPlayer'
 const navigation = {
   categories: [],
   pages: [],
 }
-
-const footerNavigation = {
-  products: [
-    { name: 'Bags', href: '#' },
-    { name: 'Tees', href: '#' },
-    { name: 'Objects', href: '#' },
-    { name: 'Home Goods', href: '#' },
-    { name: 'Accessories', href: '#' },
-  ],
-  company: [
-    { name: 'Who we are', href: '#' },
-    { name: 'Sustainability', href: '#' },
-    { name: 'Press', href: '#' },
-    { name: 'Careers', href: '#' },
-    { name: 'Terms & Conditions', href: '#' },
-    { name: 'Privacy', href: '#' },
-  ],
-  customerService: [
-    { name: 'Contact', href: '#' },
-    { name: 'Shipping', href: '#' },
-    { name: 'Returns', href: '#' },
-    { name: 'Warranty', href: '#' },
-    { name: 'Secure Payments', href: '#' },
-    { name: 'FAQ', href: '#' },
-    { name: 'Find a store', href: '#' },
-  ],
-}
-
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
+
+export const EpisodeContext = createContext()
 
 export default function GlobalLayout({ children }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
 
+  const [episode, setEpisode] = useState(null)
+  const pickEpisode = (currEpisode) => {
+    setEpisode(currEpisode)
+  }
+
   return (
-    <div className="bg-white">
+    <div className=" bg-white">
       <div>
         {/* Mobile menu */}
         <Transition.Root show={mobileMenuOpen} as={Fragment}>
@@ -76,7 +55,7 @@ export default function GlobalLayout({ children }) {
               leaveFrom="translate-x-0"
               leaveTo="-translate-x-full"
             >
-              <div className="relative max-w-xs w-full bg-white shadow-xl pb-12 flex flex-col overflow-y-auto">
+              <div className="relative max-w-xs w-full bg-gray-200 shadow-xl pb-12 flex flex-col overflow-y-auto">
                 <div className="px-4 pt-5 pb-2 flex">
                   <button
                     type="button"
@@ -286,10 +265,20 @@ export default function GlobalLayout({ children }) {
         </Transition.Root>
 
         <main className="max-w-2xl mx-auto px-4 lg:max-w-7xl lg:px-8">
-          {/* <SearchBar className="" /> */}
-
-          {children}
+          <EpisodeContext.Provider value={pickEpisode}>
+            {children}
+          </EpisodeContext.Provider>
         </main>
+
+        {episode ? (
+          <PodcastPlayer
+            streamUrl={episode.enclosures ? episode.enclosures[0].url : ''}
+            trackTitle={episode.title}
+            image={episode.itunes_image.href}
+          />
+        ) : (
+          ''
+        )}
 
         <footer
           aria-labelledby="footer-heading"
@@ -308,63 +297,6 @@ export default function GlobalLayout({ children }) {
                     alt=""
                     className="h-8 w-auto"
                   />
-                </div>
-
-                {/* Sitemap sections */}
-                <div className="mt-10 col-span-6 grid grid-cols-2 gap-8 sm:grid-cols-3 md:mt-0 md:row-start-1 md:col-start-3 md:col-span-8 lg:col-start-2 lg:col-span-6">
-                  <div className="grid grid-cols-1 gap-y-12 sm:col-span-2 sm:grid-cols-2 sm:gap-x-8">
-                    <div>
-                      <h3 className="text-sm font-medium text-gray-900">
-                        Products
-                      </h3>
-                      <ul className="mt-6 space-y-6">
-                        {footerNavigation.products.map((item) => (
-                          <li key={item.name} className="text-sm">
-                            <a
-                              href={item.href}
-                              className="text-gray-500 hover:text-gray-600"
-                            >
-                              {item.name}
-                            </a>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                    <div>
-                      <h3 className="text-sm font-medium text-gray-900">
-                        Company
-                      </h3>
-                      <ul className="mt-6 space-y-6">
-                        {footerNavigation.company.map((item) => (
-                          <li key={item.name} className="text-sm">
-                            <a
-                              href={item.href}
-                              className="text-gray-500 hover:text-gray-600"
-                            >
-                              {item.name}
-                            </a>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                  <div>
-                    <h3 className="text-sm font-medium text-gray-900">
-                      Customer Service
-                    </h3>
-                    <ul role="list" className="mt-6 space-y-6">
-                      {footerNavigation.customerService.map((item) => (
-                        <li key={item.name} className="text-sm">
-                          <a
-                            href={item.href}
-                            className="text-gray-500 hover:text-gray-600"
-                          >
-                            {item.name}
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
                 </div>
 
                 {/* Newsletter section */}

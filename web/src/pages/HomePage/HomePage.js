@@ -1,9 +1,8 @@
 import TopPodcastsCell from 'src/components/TopPodcastsCell'
-import GlobalLayout from 'src/layouts/GlobalLayout/GlobalLayout'
 
 function HomePage() {
   return (
-    <GlobalLayout>
+    <>
       <div className="border-b border-gray-200 pt-24 pb-10 ">
         <div className="flex justify-between items-baseline relative">
           <div className="w-full">
@@ -29,8 +28,7 @@ function HomePage() {
           <TopPodcastsCell />
         </section>
       </div>
-      {/* </main> */}
-    </GlobalLayout>
+    </>
   )
 }
 

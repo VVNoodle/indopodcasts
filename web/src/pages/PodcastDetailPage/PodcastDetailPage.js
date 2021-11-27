@@ -1,10 +1,11 @@
-import { Link, routes } from '@redwoodjs/router'
-
+import { useContext } from 'react'
 import { MetaTags } from '@redwoodjs/web'
 
 import PodcastDetailCell from 'src/components/PodcastDetailCell'
+import { EpisodeContext } from 'src/layouts/GlobalLayout/GlobalLayout'
 
-const PodcastDetailPage = ({ name }) => {
+const PodcastDetailPage = (props) => {
+  const pickEpisode = useContext(EpisodeContext)
   return (
     <>
       <MetaTags
@@ -14,7 +15,11 @@ const PodcastDetailPage = ({ name }) => {
       You can look at this documentation for best practices : https://developers.google.com/search/docs/advanced/appearance/good-titles-snippets */
       />
 
-      <PodcastDetailCell name={name}></PodcastDetailCell>
+      <PodcastDetailCell
+        name={props.name}
+        // episode={episode}
+        pickEpisode={pickEpisode}
+      ></PodcastDetailCell>
     </>
   )
 }

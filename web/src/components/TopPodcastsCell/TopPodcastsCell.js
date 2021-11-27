@@ -46,7 +46,7 @@ export const Success = ({ topPodcasts }) => {
             className="col-span-full mt-6 mb-4"
           >
             <h2 className="font-light text-gray-800 text-lg">
-              Podcast Populer dalam {genreBefore}
+              Podcast teratas dalam kategori {genreBefore}
             </h2>
           </li>
         )
