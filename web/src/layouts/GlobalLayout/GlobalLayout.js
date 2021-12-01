@@ -274,6 +274,7 @@ export default function GlobalLayout({ children }) {
           <PodcastPlayer
             streamUrl={episode.enclosures ? episode.enclosures[0].url : ''}
             trackTitle={episode.title}
+            trackArtist={episode.artistName}
             image={episode.itunes_image.href}
           />
         ) : (
