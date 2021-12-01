@@ -12,6 +12,7 @@ const typesenseInstantsearchAdapter = new TypesenseInstantSearchAdapter({
     nodes: [
       {
         host: process.env.REDWOOD_ENV_TYPESENSE_HOST,
+        port: process.env.REDWOOD_ENV_TYPESENSE_PORT,
         protocol: process.env.REDWOOD_ENV_TYPESENSE_PROTOCOL,
       },
     ],
