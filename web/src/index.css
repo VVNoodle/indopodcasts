@@ -5,6 +5,8 @@
 
 @tailwind  utilities;
 
+@import "../../node_modules/react-jinke-music-player/assets/index.css";
+
 .new-row {
   grid-column-start: 1;
 }
