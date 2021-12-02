@@ -1,5 +1,4 @@
 import ReactJkMusicPlayer from 'react-jinke-music-player'
-import 'react-jinke-music-player/assets/index.css'
 
 // const { PlayIconSVG, PauseIconSVG, NextIconSVG, PrevIconSVG } = Icons
 
