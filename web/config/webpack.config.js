@@ -27,20 +27,10 @@ module.exports = (config) => {
         loader: 'css-loader', // translates CSS into CommonJS
       },
       {
-        loader: 'postcss-loader',
-        options: {
-          config: {
-            path: configDir,
-          },
-        },
-      },
-      {
         loader: 'less-loader', // compiles Less to CSS
       },
     ],
   })
-
-  console.log('ish!', JSON.stringify(config, null, 2))
 
   return config
 }
