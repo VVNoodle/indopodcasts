@@ -1,6 +1,6 @@
 import ReactJkMusicPlayer from 'react-jinke-music-player'
 
-// const { PlayIconSVG, PauseIconSVG, NextIconSVG, PrevIconSVG } = Icons
+// import '/dist/static/css/app.7915b259.css'
 
 const PodcastPlayer = ({ trackTitle, trackArtist, streamUrl, image }) => {
   const audioList1 = [
