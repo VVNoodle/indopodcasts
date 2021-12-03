@@ -1,6 +1,26 @@
-import TopPodcastsCell from 'src/components/TopPodcastsCell'
+import { useState, useEffect } from 'react'
+import { TopPodcastsInfinite } from 'src/components/TopPodcastsInfinite/TopPodcastsInfinite'
 
 function HomePage() {
+  const [isBottom, setIsBottom] = useState(false)
+
+  function handleScroll() {
+    if (
+      window.innerHeight + document.documentElement.scrollTop !==
+      document.documentElement.offsetHeight
+    ) {
+      setIsBottom(false)
+      return
+    }
+    console.log('Fetch more list items!')
+    setIsBottom(true)
+  }
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
   return (
     <>
       <div className="border-b border-gray-200 pt-24 pb-10 ">
@@ -25,7 +45,11 @@ function HomePage() {
             Products
           </h2>
 
-          <TopPodcastsCell />
+          <TopPodcastsInfinite
+            limit={25}
+            isBottom={isBottom}
+            setIsBottom={setIsBottom}
+          />
         </section>
       </div>
     </>

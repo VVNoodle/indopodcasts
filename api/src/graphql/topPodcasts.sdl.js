@@ -12,6 +12,8 @@ export const schema = gql`
 
   type Query {
     topPodcasts: [TopPodcast!]! @requireAuth
+    topPodcasts(key: String, first: Int, after: Int): [TopPodcast!]!
+      @requireAuth
   }
 
   input CreateTopPodcastInput {

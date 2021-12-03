@@ -25,7 +25,7 @@ export default function GlobalLayout({ children }) {
   }
 
   return (
-    <div className=" bg-white">
+    <div className="bg-white h-full overflow-scroll">
       <div>
         {/* Mobile menu */}
         <Transition.Root show={mobileMenuOpen} as={Fragment}>

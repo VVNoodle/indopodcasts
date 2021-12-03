@@ -1,8 +1,9 @@
 import PodcastCard from '../PodcastCard/PodcastCard'
+import TopPodcasts from '../TopPodcasts/TopPodcasts'
 
 export const QUERY = gql`
-  query TopPodcastsQuery {
-    topPodcasts {
+  query TopPodcastsQuery($key: String, $first: Int, $after: Int) {
+    topPodcasts(key: $key, first: $first, after: $after) {
       id
       name
       publisher
@@ -23,7 +24,7 @@ export const Failure = ({ error }) => (
   <div style={{ color: 'red' }}>Error: {error.message}</div>
 )
 
-export const Success = ({ topPodcasts }) => {
+export const Success = ({ topPodcasts, setCursors }) => {
   let genreBefore = null
 
   const content = () => {
@@ -61,5 +62,12 @@ export const Success = ({ topPodcasts }) => {
 
     return group
   }
-  return <ul className="flex flex-col">{content()}</ul>
+  return (
+    <TopPodcasts
+      content={content}
+      setCursors={() => {
+        setCursors(topPodcasts[topPodcasts.length - 1])
+      }}
+    />
+  )
 }
