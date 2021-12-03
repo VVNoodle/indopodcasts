@@ -1,6 +1,6 @@
 import ReactJkMusicPlayer from 'react-jinke-music-player'
 
-// import '/dist/static/css/app.7915b259.css'
+import 'react-jinke-music-player/lib/styles/index.less'
 
 const PodcastPlayer = ({ trackTitle, trackArtist, streamUrl, image }) => {
   const audioList1 = [
