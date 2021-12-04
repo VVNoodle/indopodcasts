@@ -55,7 +55,7 @@ export const Success = ({ topPodcasts, setCursors }) => {
       }
     })
     group.push(
-      <li key={`last`} className="flex">
+      <li key={`last`} className="flex gap-6">
         {list}
       </li>
     )

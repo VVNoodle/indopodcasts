@@ -1,20 +1,23 @@
+import { useState, useEffect } from 'react'
+
 import ReactJkMusicPlayer from 'react-jinke-music-player'
 
 import 'react-jinke-music-player/lib/styles/index.less'
 
-const PodcastPlayer = ({ trackTitle, trackArtist, streamUrl, image }) => {
-  const audioList1 = [
-    {
-      name: trackTitle,
-      singer: trackArtist,
-      cover: image,
-      musicSrc: streamUrl,
-      // support async fetch music src. eg.
-      // musicSrc: async () => {
-      //   return await fetch('/api')
-      // },
-    },
-  ]
-  return <ReactJkMusicPlayer mode="full" theme="auto" audioLists={audioList1} />
+const PodcastPlayer = ({ episode }) => {
+  const [audio, setAudio] = useState([])
+
+  useEffect(() => {
+    setAudio([
+      {
+        name: episode.title,
+        singer: episode.artistName,
+        cover: episode.itunes_image.href,
+        musicSrc: episode.enclosures ? episode.enclosures[0].url : '',
+      },
+    ])
+  }, [episode])
+
+  return <ReactJkMusicPlayer mode="full" theme="dark" audioLists={audio} />
 }
 export default PodcastPlayer

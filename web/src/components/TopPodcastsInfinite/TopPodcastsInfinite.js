@@ -7,14 +7,14 @@ export const TopPodcastsInfinite = ({ limit, isBottom, setIsBottom }) => {
   const [lists, setLists] = useState([])
 
   useEffect(() => {
-    if (isBottom) {
+    if (isBottom && lists[lists.length - 1] !== cursors.id) {
       setLists((currLists) => {
         console.log('curlist', [...currLists, cursors.id])
         return [...currLists, cursors.id]
       })
       setIsBottom(false)
     }
-  }, [isBottom, cursors, setIsBottom])
+  }, [isBottom, cursors, setIsBottom, lists])
 
   return (
     <>

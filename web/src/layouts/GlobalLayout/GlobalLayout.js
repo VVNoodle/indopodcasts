@@ -270,16 +270,7 @@ export default function GlobalLayout({ children }) {
           </EpisodeContext.Provider>
         </main>
 
-        {episode ? (
-          <PodcastPlayer
-            streamUrl={episode.enclosures ? episode.enclosures[0].url : ''}
-            trackTitle={episode.title}
-            trackArtist={episode.artistName}
-            image={episode.itunes_image.href}
-          />
-        ) : (
-          ''
-        )}
+        {episode ? <PodcastPlayer episode={episode} /> : ''}
 
         <footer
           aria-labelledby="footer-heading"

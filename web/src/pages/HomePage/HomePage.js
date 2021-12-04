@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react'
+import { MetaTags } from '@redwoodjs/web'
+
 import { TopPodcastsInfinite } from 'src/components/TopPodcastsInfinite/TopPodcastsInfinite'
 
 function HomePage() {
@@ -23,6 +25,7 @@ function HomePage() {
 
   return (
     <>
+      <MetaTags title="Home" />
       <div className="border-b border-gray-200 pt-24 pb-10 ">
         <div className="flex justify-between items-baseline relative">
           <div className="w-full">

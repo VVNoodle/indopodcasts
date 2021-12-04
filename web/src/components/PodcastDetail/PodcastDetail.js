@@ -17,10 +17,10 @@ export default function PodcastDetail({ podcast, pickEpisode }) {
             <h1 className="text-4xl font-extrabold tracking-tight text-gray-900">
               {podcast.name}
             </h1>
-            <p className="mt-4 text-base text-gray-500">
-              {podcast.description}
-            </p>
-            <p className="mt-4 text-base text-gray-500">{podcast.rss}</p>
+            <div
+              className="mt-4 text-base text-gray-500"
+              dangerouslySetInnerHTML={{ __html: podcast.description }}
+            />
           </div>
         </div>
       </div>
