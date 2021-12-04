@@ -1,6 +1,6 @@
 import { mockHttpEvent } from '@redwoodjs/testing/api'
 
-import { handler } from './generateTopPodcast'
+import { handler } from './generateTopPodcast-background'
 
 describe('generateTopPodcast function', () => {
   it('Should respond with 200', async () => {
